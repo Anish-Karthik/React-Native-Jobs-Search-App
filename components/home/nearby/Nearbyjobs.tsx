@@ -27,7 +27,7 @@ const Nearbyjobs = () => {
       </View>
 
       <View style={styles.cardsContainer}>
-        {loading ? (
+        {loading || !data ? (
           <ActivityIndicator size='large' color={COLORS.primary} />
         ) : error ? (
           <Text>Something went wrong</Text>

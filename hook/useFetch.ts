@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 // const rapidApiKey = "155178efa1mshb5683c4a6dcb398p1ff5ecjsna6a1f83873a4";
 
 interface Query {
-  query: string;
+  query?: string;
   page?: string;
   num_pages?: string;
 }
@@ -14,7 +14,7 @@ const useFetch = ({
   query,
 }: {
   endpoint: string;
-  query: Query;
+  query: Query | Object;
 }) => {
   const [data, setData] = useState<any>(null);
   const [error, setError] = useState<any>(null);
