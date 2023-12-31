@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { View, Text, FlatList, TextInput, TouchableOpacity, Image } from 'react-native'
 
 import styles from './welcome.style'
@@ -8,6 +8,14 @@ import { icons } from '../../../constants';
 const jobTypes = ["Full-time", "Part-time", "Contractor"];
 
 const Welcome = () => {
+  const [searchTerm, setSearchTerm] = React.useState('')
+  
+  const handleClick = useCallback(() => {
+    if (searchTerm) {
+      router.push(`/search/${searchTerm}`)
+    }
+  }, [searchTerm])
+
   const router = useRouter()
   const [activeJobType, setActiveJobType] = React.useState(jobTypes[0])
   return (
@@ -21,10 +29,12 @@ const Welcome = () => {
           <TextInput
             style={styles.searchInput}
             placeholder="Search for jobs"
+            value={searchTerm}
+            onChangeText={(text) => setSearchTerm(text)}
             placeholderTextColor="#000"
           />
         </View>
-        <TouchableOpacity style={styles.searchBtn} onPress={() => {}}>
+        <TouchableOpacity style={styles.searchBtn} onPress={handleClick}>
           <Image source={icons.search} style={styles.searchBtnImage} resizeMode='contain' />
         </TouchableOpacity>
       </View>
